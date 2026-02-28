@@ -127,7 +127,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-folder
-          path: ./gh-pages/${{ env.REPORT_PATH }}
+          path: ./allure-report
           retention-days: 1
 
       - name: Extract failed testcase names and write to artifact
