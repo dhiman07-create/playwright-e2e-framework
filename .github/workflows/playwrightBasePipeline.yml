@@ -106,17 +106,26 @@ jobs:
       - name: Publish Allure report link
         if: ${{ always() && steps.allure-report.outcome == 'success' }}
         uses: actions/github-script@v7
+        env:
+          REPORT_PATH: ${{ env.REPORT_PATH }}
         with:
           script: |
-            const allureReportLink =`https://${context.repo.owner}.github.io/${context.repo.repo}/${process.env.REPORT_PATH}/`;
-            console.log(`Allure Report link: ${ allureReportLink }`)
-            const issueBody = `[Allure report](${ allureReportLink })`
-            const newIssue = await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '[${{ inputs.ALLURE_REPORT_NAME }}] #${{ github.run_number }}',
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const reportPath = process.env.REPORT_PATH;
+
+            const allureReportLink = `https://${owner}.github.io/${repo}/${reportPath}/`;
+
+            console.log(`Allure Report link: ${allureReportLink}`);
+
+            const issueBody = `### ✅ Allure Report\n\n[View Report](${allureReportLink})`;
+
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title: `[${{ inputs.ALLURE_REPORT_NAME }}] #${{ github.run_number }}`,
               body: issueBody
-            })
+            });
 
       - name: Upload Allure report files to artifacts
         if: ${{ always() && steps.allure-report.outcome == 'success' }}
