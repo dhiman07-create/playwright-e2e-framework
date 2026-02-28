@@ -83,11 +83,11 @@ jobs:
       - name: Generate Allure Report
         id: allure-report
         run: npx allure generate ./allure-results --clean -o allure-report
-        with:
-          allure-results: ./allure-results
-          website: gh-pages
-          reports-site-path: ${{ inputs.ENV }}/${{ env.FILENAME }}
-          max-reports: 10
+          
+          REPORT_PATH="${{ inputs.ENV }}/${{ env.FILENAME }}/${{ github.run_number }}"
+        
+          echo "reports-site=allure-report" >> $GITHUB_OUTPUT
+          echo "reports-site-path=$REPORT_PATH" >> $GITHUB_OUTPUT
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
