@@ -74,11 +74,14 @@ jobs:
         run: |
           echo "env=${{ inputs.ENV }}" >> ./allure-results/environment.properties
 
-      - name: Checkout gh-pages for history
-        uses: actions/checkout@v4
+      - name: Deploy Allure report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
         with:
-          ref: gh-pages
-          path: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./allure-report
+          keep_files: true
 
       - name: Generate Allure Report
         id: allure-report
