@@ -1,0 +1,22 @@
+name: UI+API Scheduled Tests
+
+on:
+  schedule:
+    - cron: "30 2 * * *" # every day at 3:30AM UTC
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+jobs:
+  EcommerceAPITest:
+    uses: ./.github/workflows/playwrightBasePipeline.yml
+    with:
+      ENV: staging
+      ALLURE_REPORT_NAME: API and UI Scheduled Regression
+      ALLURE_REPORT_DEPLOY_FOLDER: API_UI_Regression_Sheduled_Tests
+      SEND_EMAIL: 'true'
+      EMAIL_TITLE: Playwright API+UI Scheduled Regression Test Report
+    secrets: inherit
