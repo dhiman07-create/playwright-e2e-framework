@@ -1,0 +1,31 @@
+name: UI + API Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENV:
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+        default: 'dev'
+        description: Select environment
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+jobs:
+  UIAPITest:
+    uses: ./.github/workflows/playwrightBasePipeline.yml
+    with:
+      ENV: ${{ inputs.ENV }}
+      ALLURE_REPORT_NAME: API and UI Regression
+      ALLURE_REPORT_DEPLOY_FOLDER: API_UI_Regression_Tests
+      SEND_EMAIL: 'true'
+      EMAIL_TITLE: Playwright API+UI Regression Test Report
+    secrets: inherit
