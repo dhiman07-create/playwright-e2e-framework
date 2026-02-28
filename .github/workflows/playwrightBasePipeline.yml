@@ -112,7 +112,7 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const reportPath = process.env.REPORT_PATH;
+            const reportPath = `${{ inputs.ENV }}/playwright/${{ github.run_number }}`;
 
             const allureReportLink = `https://${owner}.github.io/${repo}/${reportPath}/`;
 
