@@ -403,7 +403,7 @@ jobs:
           server_port: ${{ secrets.SMTP_PORT }}
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "Ecommerce-API Regression - Run #${{ github.run_number }}"
+          subject: "UI+API Regression - Run #${{ github.run_number }}"
           to: ${{ secrets.REPORT_TO }}
           from: ${{ secrets.SMTP_USERNAME }}
           html_body: |
