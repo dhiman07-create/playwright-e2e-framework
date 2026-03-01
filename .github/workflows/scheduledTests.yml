@@ -2,7 +2,7 @@ name: UI+API Scheduled Tests
 
 on:
   schedule:
-    - cron: "30 2 * * *" # every day at 3:30AM UTC
+    - cron: "30 0 * * *" # every day at 1:30AM UTC
 
 permissions:
   contents: write
