@@ -11,7 +11,7 @@ export class ApiClient {
     this.apiContext = await request.newContext({
       baseURL: apiBaseURL,
       extraHTTPHeaders: {
-        'x-api-key': 'reqres_973319b379034bca95d23d03549eddb9'
+        'x-api-key': 'reqres_d97bcf1f8e5d4e868dc9575f256da2e9'
       }
     });
   }
