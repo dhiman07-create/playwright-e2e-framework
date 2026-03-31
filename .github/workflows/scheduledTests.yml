@@ -11,7 +11,7 @@ permissions:
   issues: write
 
 jobs:
-  EcommerceAPITest:
+  UIAPITest:
     uses: ./.github/workflows/playwrightBasePipeline.yml
     with:
       ENV: staging
